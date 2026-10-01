@@ -1,0 +1,187 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans';
+@import 'leaflet/dist/leaflet.css';
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Token warna: terang & gelap (gelap berguna saat cek cuaca jam 2 pagi sebelum ke Sikunir). */
+:root {
+  color-scheme: light;
+  --bg: #eef2f0;
+  --card: #ffffff;
+  --card-2: #f3f6f4;
+  --ink: #142235;
+  --muted: #5d6c7e;
+  --line: #e1e7e4;
+  --day1: #1d3557;
+  --day2: #1c8c7e;
+  --day3: #d99a1e;
+  --day3-ink: #1a1405;
+  --rain: #2a78d6;
+  --temp: #eb6834;
+  --cold: #4f63c9;
+  --fog: #6f7f90;
+  --ok: #17806f;
+  --warn: #c2410c;
+  --sky-1: #a9c7e8;
+  --sky-2: #e9eef2;
+  --hill-1: #7d9aa6;
+  --hill-2: #5d7d89;
+  --hill-3: #3b5968;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #0b1320;
+    --card: #131e2e;
+    --card-2: #192739;
+    --ink: #e9eff6;
+    --muted: #97a6b9;
+    --line: #24344a;
+    --day1: #345d9c;
+    --day2: #1f9d8c;
+    --day3: #e7a93a;
+    --rain: #3987e5;
+    --temp: #d95926;
+    --cold: #8f9dff;
+    --fog: #a2b2c4;
+    --ok: #3cc4b2;
+    --warn: #f59e0b;
+    --sky-1: #1b2b47;
+    --sky-2: #2b3c57;
+    --hill-1: #26384d;
+    --hill-2: #1c2b3d;
+    --hill-3: #131f2e;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-card2: var(--card-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-day1: var(--day1);
+  --color-day2: var(--day2);
+  --color-day3: var(--day3);
+  --color-rain: var(--rain);
+  --color-temp: var(--temp);
+  --color-cold: var(--cold);
+  --color-fog: var(--fog);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- Peta ---------- */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--card-2);
+}
+.wx-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* titik (stem) tepat di koordinat: jangkar di bawah untuk marker biasa */
+  transform: translate(-50%, calc(-100% + 6px));
+  width: max-content;
+}
+.wx-marker__pill {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 8px 2px 2px;
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 2px 10px rgba(10, 20, 35, 0.25);
+  border: 2px solid var(--card);
+  font-weight: 800;
+  font-size: 14px;
+  line-height: 1;
+}
+.wx-marker__pill img {
+  width: 30px;
+  height: 30px;
+}
+.wx-marker__pp {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rain);
+  margin-left: 2px;
+}
+.wx-marker__name {
+  margin-top: 3px;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--day1) 88%, transparent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.wx-marker__stem {
+  width: 8px;
+  height: 8px;
+  margin-top: 2px;
+  border-radius: 999px;
+  background: var(--day1);
+  border: 2px solid #fff;
+  box-sizing: content-box;
+}
+/* label di bawah titik: urutan dibalik dan jangkar di atas */
+.wx-marker.is-below {
+  flex-direction: column-reverse;
+  transform: translate(-50%, -6px);
+}
+.wx-marker.is-below .wx-marker__stem {
+  margin: 0 0 2px;
+}
+.wx-marker.is-below .wx-marker__name {
+  margin: 0 0 3px;
+}
+.wx-marker.is-compact .wx-marker__pill {
+  padding-right: 6px;
+  font-size: 13px;
+}
+.wx-marker.is-compact .wx-marker__pill img {
+  width: 24px;
+  height: 24px;
+}
+.wx-marker.is-active .wx-marker__pill {
+  border-color: var(--day3);
+  transform: scale(1.12);
+}
+.wx-marker.is-extra .wx-marker__name {
+  background: color-mix(in srgb, var(--fog) 85%, transparent);
+}
+.wx-me {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #2a78d6;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 6px rgba(42, 120, 214, 0.25);
+  transform: translate(-50%, -50%);
+}
