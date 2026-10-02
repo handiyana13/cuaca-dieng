@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { PLACE, type PlaceId } from '../data/places';
 import { HOUR, addDays, at, dateOf, fmtDay, floorHour, hhmm, type LocalMs } from '../lib/time';
 import { hourIcon, hourLabel, severity } from '../weather/interpret';
-import { bmkgAt } from '../weather/lookup';
+import { bmkgAt, bmkgPhase } from '../weather/lookup';
 import { hoursBetween } from '../weather/summary';
 import type { Forecast } from '../weather/types';
 import { BmkgChip, Card, WxIcon, fmtVis, round } from './bits';
@@ -24,7 +24,8 @@ export function HourlyView({ forecast: f, place, onPlace, interval, onIntervalCh
   const from = at(tripStart, '00:00');
   const to = at(addDays(tripStart, 2), '23:00');
   const hours = f ? hoursBetween(f, place, from, to) : [];
-  const rows = hours.filter((h) => onInterval(h.t, interval));
+  const phase = bmkgPhase(f);
+  const rows = hours.filter((h) => onInterval(h.t, interval, phase));
   const byDay = new Map<string, typeof rows>();
   rows.forEach((h) => byDay.set(dateOf(h.t), [...(byDay.get(dateOf(h.t)) ?? []), h]));
   const meta = PLACE[place];

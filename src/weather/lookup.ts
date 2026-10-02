@@ -3,6 +3,12 @@ import { HOUR, dateOf, floorHour, type LocalMs } from '../lib/time';
 import { severity } from './interpret';
 import type { BmkgPoint, DailyPoint, Forecast, HourPoint } from './types';
 
+/** Jam prakiraan BMKG modulo 3 (0, 1, atau 2), untuk menyejajarkan interval 3/6 jam. */
+export function bmkgPhase(f: Forecast | null): number {
+  const first = f && Object.values(f.bmkg).find((v) => v.points.length)?.points[0];
+  return first ? new Date(first.t).getUTCHours() % 3 : 2;
+}
+
 /** Data model per jam untuk jam yang memuat waktu `t`. */
 export function hourAt(f: Forecast, place: PlaceId, t: LocalMs): HourPoint | undefined {
   const hours = f.om[place]?.hours;

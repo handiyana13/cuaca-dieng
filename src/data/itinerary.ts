@@ -13,8 +13,8 @@ export interface Activity {
 
 // Itinerary Open Trip Dieng 3D2N (Bali Satak Travel). Jam adalah estimasi.
 export const ITINERARY: Activity[] = [
-  { day: 1, start: '17:00', end: '21:00', title: 'Penjemputan ke meeting point', place: 'jakarta' },
-  { day: 1, start: '21:00', title: 'Berangkat menuju Dieng', place: 'jakarta' },
+  { day: 1, start: '18:00', title: 'Kumpul di titik penjemputan Exit Tol Cisalak (penjemputan 17:00–21:00)', place: 'cisalak' },
+  { day: 1, start: '21:00', title: 'Berangkat menuju Dieng', place: 'cisalak' },
 
   { day: 2, start: '05:00', title: 'Tiba di Rest Area Kalibening — mandi, sholat Subuh, istirahat', place: 'kalibening' },
   { day: 2, start: '06:30', title: 'Menuju lokal resto sarapan pagi', place: 'kalibening', cost: 'include' },
@@ -35,7 +35,7 @@ export const ITINERARY: Activity[] = [
   { day: 3, start: '09:00', title: 'Packing barang & check out homestay', place: 'dieng' },
   { day: 3, start: '09:30', title: 'Belanja oleh-oleh khas Dieng', place: 'dieng' },
   { day: 3, start: '10:30', title: 'Kembali menuju Jakarta', place: 'dieng' },
-  { day: 3, start: '22:00', title: 'Tiba di meeting point awal, trip selesai', place: 'jakarta' },
+  { day: 3, start: '22:00', title: 'Tiba di meeting point awal (Exit Tol Cisalak), trip selesai', place: 'cisalak' },
 ];
 
 export const DAY_META: Record<1 | 2 | 3, { label: string; color: string }> = {
@@ -44,5 +44,5 @@ export const DAY_META: Record<1 | 2 | 3, { label: string; color: string }> = {
   3: { label: 'Hari Ketiga', color: 'var(--day3)' },
 };
 
-/** Tanggal default Hari 1: berangkat malam 1 Okt, di Dieng 2–3 Okt. Bisa diubah di app. */
-export const DEFAULT_TRIP_START = '2026-10-01';
+/** Tanggal default Hari 1: kumpul & berangkat malam 2 Okt, di Dieng 3–4 Okt. Bisa diubah di app. */
+export const DEFAULT_TRIP_START = '2026-10-02';

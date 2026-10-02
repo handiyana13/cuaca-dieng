@@ -3,8 +3,11 @@ import { PLACES, type PlaceId } from '../data/places';
 export type Interval = 1 | 3 | 6;
 export const INTERVALS: Interval[] = [1, 3, 6];
 
-/** Jam yang ditampilkan untuk interval: 3 & 6 jam disejajarkan dengan jam BMKG (02, 05, 08, …). */
-export const onInterval = (t: number, interval: Interval) => new Date(t).getUTCHours() % interval === 2 % interval;
+/**
+ * Jam yang ditampilkan untuk interval: 3 & 6 jam disejajarkan dengan jam prakiraan BMKG.
+ * BMKG kadang menggeser jadwalnya (mis. 02/05/08… ↔ 01/04/07…), jadi `phase` dibaca dari data.
+ */
+export const onInterval = (t: number, interval: Interval, phase: number) => new Date(t).getUTCHours() % interval === phase % interval;
 
 export function IntervalChips({ value, onChange }: { value: Interval; onChange: (v: Interval) => void }) {
   return (

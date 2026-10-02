@@ -19,7 +19,7 @@ npm run build    # hasil statis di dist/ (bisa di-hosting di mana saja)
 - **Peta**: titik-titik Dieng (plus spot jeep) dengan cuaca pada jam yang dipilih; slider waktu interval 1/3/6 jam; tombol *Lokasi saya*.
 - **Per jam**: grafik suhu & peluang hujan + tabel per 1/3/6 jam untuk tiap lokasi.
 - **Offline**: data terakhir disimpan di perangkat; setelah dibuka sekali (versi build), app tetap terbuka tanpa sinyal. Bisa dipasang ke layar utama HP.
-- Tanggal trip bisa diubah dari header (default Hari 1 = 1 Okt 2026).
+- Tanggal trip bisa diubah dari header (default Hari 1 = 2 Okt 2026: kumpul 18:00 di Exit Tol Cisalak, di Dieng 3–4 Okt).
 
 ## Sumber data
 
@@ -30,7 +30,7 @@ npm run build    # hasil statis di dist/ (bisa di-hosting di mana saja)
 
 Suhu BMKG untuk Dieng cenderung lebih hangat karena grid modelnya berada di elevasi lebih rendah, jadi suhu utama memakai Open-Meteo dan BMKG ditampilkan sebagai pembanding.
 
-Kode desa BMKG yang dipakai: Dieng Kulon `33.04.16.2008`, Jojogan `33.07.13.2012`, Sembungan `33.07.13.2003`, Karangtengah `33.04.16.2007`, Pekasiran `33.04.16.2004`, Kalibening `33.04.18.2001`, Gambir `31.71.01.1001`.
+Kode desa BMKG yang dipakai: Dieng Kulon `33.04.16.2008`, Jojogan `33.07.13.2012`, Sembungan `33.07.13.2003`, Karangtengah `33.04.16.2007`, Pekasiran `33.04.16.2004`, Kalibening `33.04.18.2001`, Cisalak Pasar (titik kumpul) `32.76.02.1012`.
 
 ## Struktur
 

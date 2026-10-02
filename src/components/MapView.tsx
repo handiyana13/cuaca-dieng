@@ -4,7 +4,7 @@ import { LayerGroup, LayersControl, MapContainer, Marker, TileLayer, useMap, use
 import { PLACE, PLACES, type Place, type PlaceId } from '../data/places';
 import { HOUR, addDays, at, fmtDay, hhmm, type LocalMs } from '../lib/time';
 import { hourIcon, tipsFor } from '../weather/interpret';
-import { bmkgAt, hourAt } from '../weather/lookup';
+import { bmkgAt, bmkgPhase, hourAt } from '../weather/lookup';
 import { fetchOpenMeteo } from '../weather/sources';
 import type { Forecast, OmPlace } from '../weather/types';
 import { BmkgChip, Card, TipChip, WeatherPill, WxIcon, round } from './bits';
@@ -95,12 +95,13 @@ function Locate({ onFound }: { onFound: (lat: number, lon: number) => void }) {
 
 export function MapView({ forecast: f, tripStart, now, place, onPlace, time, onTime, interval, onIntervalChange, onHourly }: Props) {
   const days = [0, 1, 2].map((n) => addDays(tripStart, n));
+  const phase = bmkgPhase(f);
   const steps = useMemo(() => {
     const out: LocalMs[] = [];
-    for (let t = at(days[0], '00:00'); t <= at(days[2], '23:00'); t += HOUR) if (onInterval(t, interval)) out.push(t);
+    for (let t = at(days[0], '00:00'); t <= at(days[2], '23:00'); t += HOUR) if (onInterval(t, interval, phase)) out.push(t);
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tripStart, interval]);
+  }, [tripStart, interval, phase]);
   // jendela waktu yang sedang berjalan: langkah terakhir yang tidak melewati `time`
   const stepIndex = Math.max(0, steps.reduce((best, t, i) => (t <= time ? i : best), 0));
   const t = steps[stepIndex] ?? time;

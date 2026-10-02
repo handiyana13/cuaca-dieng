@@ -23,22 +23,22 @@ export function NowCard({ forecast: f, trip, tripStart, now }: Props) {
     const day2 = addDays(tripStart, 1);
     const d = f ? dailyAt(f, 'dieng', day2) : undefined;
     const rain = f ? rainWindows(f, 'dieng', day2) : [];
-    const jkt = f ? hourAt(f, 'jakarta', now) : undefined;
+    const meet = f ? hourAt(f, 'cisalak', now) : undefined;
     return (
       <Card className="p-4 sm:p-5">
         <div className="text-xs font-bold uppercase tracking-wider text-muted">Trip dimulai dalam</div>
         <div className="mt-1 text-3xl font-extrabold tracking-tight">{countdown(phase.first.startT - now)}</div>
         <div className="mt-1 text-sm text-muted">
-          {fmtDay(phase.first.startT)} · {hhmm(phase.first.startT)} {phase.first.title.toLowerCase()}
+          {fmtDay(phase.first.startT)} · {hhmm(phase.first.startT)} — {phase.first.title}
         </div>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {jkt && (
+          {meet && (
             <div className="flex items-center gap-3 rounded-2xl bg-card2 p-3">
-              <WxIcon src={hourIcon(jkt)} size={48} />
+              <WxIcon src={hourIcon(meet)} size={48} />
               <div className="text-sm">
-                <div className="font-bold">Jakarta sekarang</div>
+                <div className="font-bold">Exit Tol Cisalak sekarang</div>
                 <div className="text-muted">
-                  {round(jkt.temp)}° · peluang hujan {round(jkt.pp)}%
+                  {round(meet.temp)}° · peluang hujan {round(meet.pp)}%
                 </div>
               </div>
             </div>

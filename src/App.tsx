@@ -33,7 +33,8 @@ function useStored<T>(key: string, initial: T) {
 }
 
 export default function App() {
-  const [tripStart, setTripStart] = useStored('wx-trip-start', DEFAULT_TRIP_START);
+  // v2: tanggal default berubah ke 2 Okt; kunci baru supaya tanggal lama yang tersimpan di HP tidak terpakai
+  const [tripStart, setTripStart] = useStored('wx-trip-start-v2', DEFAULT_TRIP_START);
   const [interval, setInterval_] = useStored<Interval>('wx-interval', 3);
   const [tab, setTab] = useState<Tab>('itinerary');
   const [place, setPlace] = useState<PlaceId>('candi-arjuna');

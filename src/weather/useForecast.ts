@@ -4,7 +4,7 @@ import { MIN } from '../lib/time';
 import { fetchBmkg, fetchOpenMeteo } from './sources';
 import type { BmkgVillage, Forecast } from './types';
 
-const CACHE_KEY = 'wx-dieng-cache-v1';
+const CACHE_KEY = 'wx-dieng-cache-v2';
 /** Data dianggap basi setelah 30 menit (BMKG memperbarui per jam). */
 const STALE_MS = 30 * MIN;
 
